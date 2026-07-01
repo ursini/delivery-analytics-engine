@@ -71,3 +71,11 @@ pedidos_por_hora = (
     )
     .reset_index()
 )
+
+status_resumo = (
+    df["status"]
+    .value_counts()
+    .to_frame(name="quantidade")
+    .reset_index()
+    .rename(columns={"index": "status"})
+)
