@@ -107,3 +107,6 @@ velocidade_rating = (
     )
     .round(2)
 )
+
+top_restaurantes = df["restaurante"].value_counts().head(3)
+piores_avaliacoes = df.nsmallest(5, "rating")[["id_pedido", "restaurante", "rating", "comentario"]]
