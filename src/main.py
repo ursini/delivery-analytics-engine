@@ -89,3 +89,5 @@ pedidos_ruim = (
     )
     .reset_index()
 )
+
+df_numericos = df[["preco_pedido", "tempo_entrega_min", "rating", "tamanho_comentario"]].corr()
