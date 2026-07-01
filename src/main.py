@@ -116,3 +116,44 @@ preco_q3 = df["preco_pedido"].quantile(0.75)
 preco_iqr = preco_q3 - preco_q1
 
 pedidos_preco_alto = df[df["preco_pedido"] > (preco_q3 + 1.5 * preco_iqr)]
+
+
+
+
+
+print("="*50)
+print("ANÁLISE DE PEDIDOS E ENTREGAS")
+print("="*50)
+
+print("\n--- PERFORMANCE DOS ENTREGADORES ---")
+print(performance_entregador)
+
+print("\n--- QUALIDADE POR RESTAURANTE ---")
+print(qualidade_restaurante)
+
+print("\n--- PEDIDOS POR HORA DO DIA ---")
+print(pedidos_por_hora)
+
+print("\n--- STATUS DOS PEDIDOS ---")
+print(status_resumo)
+
+print("\n--- PEDIDOS COM BAIXA AVALIAÇÃO ---")
+print(pedidos_ruim)
+
+print("\n--- CORRELAÇÃO ENTRE VARIÁVEIS ---")
+print(df_numericos.round(3))
+
+print("\n--- ANÁLISE: VELOCIDADE vs QUALIDADE ---")
+print(velocidade_rating)
+
+print("\n--- TOP 3 RESTAURANTES (VOLUME) ---")
+print(top_restaurantes)
+
+print("\n--- 5 PIORES AVALIAÇÕES ---")
+print(piores_avaliacoes)
+
+print("\n--- PEDIDOS COM PREÇO OUTLIER (MUITO CARO) ---")
+print(pedidos_preco_alto[["id_pedido", "restaurante", "preco_pedido"]].head())
+
+print("\nTotal de registros:", len(df))
+print("Período de análise:", df["data_pedido"].min(), "até", df["data_pedido"].max())
