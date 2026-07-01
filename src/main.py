@@ -91,3 +91,19 @@ pedidos_ruim = (
 )
 
 df_numericos = df[["preco_pedido", "tempo_entrega_min", "rating", "tamanho_comentario"]].corr()
+
+df["velocidade"] = pd.cut(
+    df["tempo_entrega_min"],
+    bins=[0, 30, 60, 90],
+    labels=["Rápido", "Normal", "Lento"]
+)
+
+velocidade_rating = (
+    df.groupby("velocidade")
+    .agg(
+        pedidos=("id_pedido", "count"),
+        rating_medio=("rating", "mean"),
+        preco_medio=("preco_pedido", "mean")
+    )
+    .round(2)
+)
