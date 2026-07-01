@@ -61,3 +61,13 @@ qualidade_restaurante = (
     .round(2)
     .sort_values("rating_medio", ascending=False)
 )
+
+pedidos_por_hora = (
+    df.groupby("hora_pedido")
+    .agg(
+        quantidade=("id_pedido", "count"),
+        faturamento=("preco_pedido", "sum"),
+        tempo_medio=("tempo_entrega_min", "mean")
+    )
+    .reset_index()
+)
