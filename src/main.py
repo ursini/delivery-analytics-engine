@@ -110,3 +110,9 @@ velocidade_rating = (
 
 top_restaurantes = df["restaurante"].value_counts().head(3)
 piores_avaliacoes = df.nsmallest(5, "rating")[["id_pedido", "restaurante", "rating", "comentario"]]
+
+preco_q1 = df["preco_pedido"].quantile(0.25)
+preco_q3 = df["preco_pedido"].quantile(0.75)
+preco_iqr = preco_q3 - preco_q1
+
+pedidos_preco_alto = df[df["preco_pedido"] > (preco_q3 + 1.5 * preco_iqr)]
