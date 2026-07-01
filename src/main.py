@@ -23,3 +23,15 @@ reviews = pd.DataFrame({
 
 pedidos = pedidos.drop_duplicates(subset=["id_pedido"])
 reviews["comentario"] = reviews["comentario"].fillna("Sem comentário")
+
+df = pedidos.merge(reviews, on="id_pedido", how="left")
+
+df["hora_pedido"] = df["data_pedido"].dt.hour
+df["margem_tempo"] = df["tempo_entrega_min"] / 60
+
+df["pedido_ok"] = df["status"].apply(
+    lambda x: "Sim" if x == "Entregue" else "Não"
+)
+
+df["restaurante_lower"] = df["restaurante"].str.lower()
+df["tamanho_comentario"] = df["comentario"].str.len()
