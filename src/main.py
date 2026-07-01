@@ -48,3 +48,16 @@ performance_entregador = (
     .round(2)
     .sort_values("rating_medio", ascending=False)
 )
+
+qualidade_restaurante = (
+    df.groupby("restaurante")
+    .agg(
+        pedidos_total=("id_pedido", "count"),
+        rating_medio=("rating", "mean"),
+        pedidos_5_estrelas=("rating", lambda x: (x == 5).sum()),
+        pedidos_1_estrela=("rating", lambda x: (x == 1).sum()),
+        preco_medio=("preco_pedido", "mean")
+    )
+    .round(2)
+    .sort_values("rating_medio", ascending=False)
+)
