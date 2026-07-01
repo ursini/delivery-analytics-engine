@@ -35,3 +35,16 @@ df["pedido_ok"] = df["status"].apply(
 
 df["restaurante_lower"] = df["restaurante"].str.lower()
 df["tamanho_comentario"] = df["comentario"].str.len()
+
+performance_entregador = (
+    df[df["status"] == "Entregue"]
+    .groupby("entregador")
+    .agg(
+        entregas_completadas=("id_pedido", "count"),
+        tempo_medio=("tempo_entrega_min", "mean"),
+        rating_medio=("rating", "mean"),
+        faturamento=("preco_pedido", "sum")
+    )
+    .round(2)
+    .sort_values("rating_medio", ascending=False)
+)
