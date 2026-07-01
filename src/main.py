@@ -79,3 +79,13 @@ status_resumo = (
     .reset_index()
     .rename(columns={"index": "status"})
 )
+
+pedidos_ruim = (
+    df[df["rating"] <= 2]
+    .groupby(["restaurante", "status"])
+    .agg(
+        quantidade=("id_pedido", "count"),
+        preco_medio=("preco_pedido", "mean")
+    )
+    .reset_index()
+)
