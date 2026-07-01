@@ -20,3 +20,6 @@ reviews = pd.DataFrame({
     "comentario": [f"Comentário_{i}" for i in range(350)],
     "palavras_chave": np.random.choice(["Delicioso", "Lindo", "Rápido", "Frio", "Pequeno", "Caro"], 350)
 })
+
+pedidos = pedidos.drop_duplicates(subset=["id_pedido"])
+reviews["comentario"] = reviews["comentario"].fillna("Sem comentário")
